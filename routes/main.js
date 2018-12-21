@@ -32,8 +32,9 @@ router.get("/generate-fake-data", (req, res, next) => {
 })
 
 
+//implementing pagination
 router.get("/products", (req, res, next) => {
-    const perPage = 10
+    const perPage = 9
     const page = req.query.page || 1
     Product
         .find({})
@@ -42,15 +43,27 @@ router.get("/products", (req, res, next) => {
         .exec((err, products) => {
             Product.count().exec((err, count) => {
                 if (err) return next(err)
+                //console.log(products)
                 res.send(products)
             })
         })
     })
 
-// router.get("/products/:product", (req, res) => {
-//     Product
-//         .findById({})
+//getting the products by product id
+router.get("/products/:product", (req, res) => {
+    const {_id} = req.params.product
+    Product.findById(_id, (err, product) => {
+        if (err) throw err;
+        //console.log(product)
+    });
+});
 
-// })
-
+router.get("/reviews", (req, res) => {
+    Review.find((err, reviews) => {
+        Review.populate(reviews, {path: 'reviews'}, (err, data) => {
+            console.log(data);
+            res.send(reviews);
+        });
+    });
+});
 module.exports = router
