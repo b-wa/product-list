@@ -58,12 +58,63 @@ router.get("/products/:product", (req, res) => {
     });
 });
 
+//get the all the product reviews
 router.get("/reviews", (req, res) => {
     Review.find((err, reviews) => {
         Review.populate(reviews, {path: 'reviews'}, (err, data) => {
+            if (err) throw err;
             console.log(data);
             res.send(reviews);
         });
     });
 });
+
+//add new products to the data base
+router.post("/products", (req, res) => {
+    let newProduct = new Product({
+        category: req.body.category,
+        name: req.body.name,
+        price: req.body.price,
+        image: "https://www.oysterdiving.com/components/com_easyblog/themes/wireframe/images/placeholder-image.png",
+        reviews: []
+    })
+            
+        newProduct.save((err) => {
+            if (err) throw err;
+            }) 
+    res.send(newProduct);
+})
+
+//add new reviews for a particular(single) product
+router.post("/:product/reviews", (req, res) => {
+    const productId = req.params.product;
+    let newReview = new Review({
+        userName: req.body.userName,
+        reviewText: req.body.reviewText,
+        product: productId
+    })
+    newReview.save()
+    Product.findById(productId, (err, product) => {
+        if (err) throw err;
+        product.reviews.push(newReview);
+        res.send(product)
+    }).exec()
+
+   
+
+
+});
+
+// //delete a specific product
+// router.delete("/products/:product", (req, res) => {
+
+// });
+
+// //delete any review
+// router.delete("/reviews/:review", (req, res) => {
+// });
+
+
+
+
 module.exports = router
