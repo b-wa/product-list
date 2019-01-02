@@ -5,7 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon server.js"
+    "products-client": "cd products-client && npm start",
+    "start": "nodemon server/server.js",
+    "server": "nodemon server/ server.js",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm products-client\""
   },
   "repository": {
     "type": "git",
@@ -24,5 +27,8 @@
     "express": "^4.16.4",
     "faker": "^4.1.0",
     "mongoose": "^5.4.0"
-  }
+  }, 
+  "devDependencies": {
+    "concurrently": "^4.1.0"
+  } 
 }

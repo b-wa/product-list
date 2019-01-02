@@ -1,13 +1,28 @@
 import React, { Component } from "react";
 import ProductList from "../containers/product-list";
+import { connect } from "react-redux";
+import { fetchProducts } from "../actions";
+import { bindActionCreators } from "redux";
 
 class App extends Component {
-    render () {
+    componentDidMount () {
+        this.props.fetchProducts();
+    }
+
+    render() {
         return (
-            <div>
-                <ProductList />
-            </div>    
+            <div className = "Container">
+                <h1 className="Products"></h1>
+                <div className="row">
+                    <ProductList />
+                </div>
+            </div>
         )
     }
 }
-export default App;
+
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({ fetchProducts }, dispatch)
+};
+
+export default connect(null, mapDispatchToProps)(App);
