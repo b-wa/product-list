@@ -12,7 +12,7 @@ class App extends Component {
     render() {
         return (
             <div className = "Container">
-                <h1 className="Products"></h1>
+                <h1>Products></h1>
                 <div className="row">
                     <ProductList />
                 </div>

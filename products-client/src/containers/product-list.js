@@ -2,8 +2,12 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 class ProductList extends Component {
+    componentDidMount() {
+        this.props.fetchProducts();
+    }
+    
     renderProducts() {
-        return this.props.products.map(product => {
+         this.props.products.map(product => {
             //clean this up by using grid
             return (
                <div> 
