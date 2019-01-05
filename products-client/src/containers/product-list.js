@@ -1,9 +1,26 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { fetchProducts } from "../actions";
+import { bindActionCreators } from "redux";
 
 class ProductList extends Component {
+
+    constructor(props) {
+        super(props);
+
+        this.fetchProducts = this.fetchProducts.bind(this)
+    }
     componentDidMount() {
-        this.props.fetchProducts();
+        this.fetchProducts();
+    }
+
+    fetchProducts() {
+        const { prodcutReducer } = this.props;
+        const { isFetching, hasFetched } = productReducer;
+        
+        if (!isFetching && !hasFetched) {
+            this.props.fetchProducts();
+        }
     }
     
     renderProducts() {
@@ -24,16 +41,19 @@ class ProductList extends Component {
     render() {
             return (
                 <div className="container">
-                 <div className="row">
-                    {this.renderProducts()}
-                 </div>
+                {this.props.products && this.props.products.length > 0 && (
+                    <div className="row">
+                        {this.renderProducts()}
+                    </div>    
+                )}  
+                 
                 </div>
             )
     }
 }
     
-function mapStateToProps(state) {
-    return {products: state.products.products, page: state.products.page}
-}
+const mapStateToProps = state => ({
+    products: state.productReducer.data
+})
 
 export default connect(mapStateToProps)(ProductList);

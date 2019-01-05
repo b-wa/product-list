@@ -1,15 +1,23 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
-import { createStore, applyMiddleware } from "redux";
+import { createStore, applyMiddleware, compose } from "redux";
 import promise from "redux-promise";
-import App from "./components/App";
+import thunk  from "redux-thunk";
+import App from "./components/app";
 import reducers from "./reducers";
 
-const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
+const createStoreWithEnhancers = () => {
+    const initialState = {};
+    const middleWare = [thunk];
+    const composedEnhancers = compose(applyMiddleware(...middleWare));
+    const store = createStore(reducers, initialState, composedEnhancers);
+    return store;
+}
+
 
 ReactDOM.render(
-    <Provider store ={createStoreWithMiddleware(reducers)}>
+    <Provider store ={createStoreWithEnhancers()}>
         <App />
     </Provider>,
     document.getElementById('root')
