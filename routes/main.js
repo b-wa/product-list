@@ -33,7 +33,7 @@ router.get("/generate-fake-data", (req, res, next) => {
 
 
 //implementing pagination
-router.get("/products?:page?:price", (req, res, next) => {
+router.get("/products", (req, res, next) => {
     const perPage = 9
     const page = req.query.page || 1
     let category = {}
@@ -100,7 +100,7 @@ router.post("/products", (req, res) => {
         category: req.body.category,
         name: req.body.name,
         price: req.body.price,
-        image: "https://www.oysterdiving.com/components/com_easyblog/themes/wireframe/images/placeholder-image.png",
+        image: "https://i.amz.mshcdn.com/P7S6Lcd8gTHKwY3CsMPpOCOQ_pE=/950x534/https%3A%2F%2Fblueprint-api-production.s3.amazonaws.com%2Fuploads%2Fstory%2Fthumbnail%2F78531%2Fbd261f4d-e46f-47de-b4cb-6fd6b8440b9b.png",
         reviews: []
     })
             

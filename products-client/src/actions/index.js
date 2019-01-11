@@ -1,30 +1,20 @@
 import axios from "axios";
 
-const ROOT_URL = 'http://localhost:8000';
+export const FETCH_PRODUCTS = "fetch_Products";
 
-export const fetchProductsRequest = () => ({
-    type: 'FETCH_PRODUCTS_REQUEST',
-});
+export const fetchProducts = (page = 1) => {
+   return async dispatch => {
+       try {
+        const productsRes = await fetch('http://localhost:8000/products');
+        const products = await productsRes.json();
 
-export const fetchProductsSuccess = (product) => ({
-    type: 'FETCH_PRODUCTS_SUCCESS',
-    payload: product
-});
-
-export const fetchProductsError = (err) => ({
-    type: 'FETCH_PRODUCTS_ERROR',
-    payload: err
-});
-
-export const fetchProducts = (page, price, category) => {
-    dispatch(fetchProductsRequest);
-    return axios.get(`${ROOT_URL}/products`, {query: {page, price, category}})
-        .then(
-            (res) => {
-                dispatch(fetchProductsSuccess(res.data));
-            },
-            (err) => {
-                dispatch(fetchProductsError(err.toString()));
-            }
-        )
-};
+        return dispatch({
+            type: FETCH_PRODUCTS,
+            payload: products
+        })
+       } catch (error) {
+        console.error(error)
+       }
+    
+    }
+}

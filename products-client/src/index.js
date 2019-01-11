@@ -1,25 +1,27 @@
-import React from "react";
-import ReactDOM from "react-dom";
+import React, { Fragment } from "react";
+import { render }from "react-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
-import promise from "redux-promise";
 import thunk  from "redux-thunk";
-import App from "./components/app";
-import reducers from "./reducers";
+import App from "./components/App";
+import rootReducer from "./reducers/index";
+import ProductList from "./components/ProductList";
 
-const createStoreWithEnhancers = () => {
-    const initialState = {};
-    const middleWare = [thunk];
-    const composedEnhancers = compose(applyMiddleware(...middleWare));
-    const store = createStore(reducers, initialState, composedEnhancers);
-    return store;
-}
+const store = createStore(rootReducer, {}, applyMiddleware(thunk));
 
-
-ReactDOM.render(
-    <Provider store ={createStoreWithEnhancers()}>
-        <App />
-    </Provider>,
-    document.getElementById('root')
+render(
+  <Provider store={store}>
+    <Router>
+      <Fragment>
+        <App>
+          <Switch>
+            <Route exact path="/" component={ProductList} />
+            {/*<Route exact path="/:id" component={ProductDetail} />*/}
+          </Switch>
+        </App>
+      </Fragment>
+    </Router>
+  </Provider>,
+  document.getElementById("root")
 );
-
