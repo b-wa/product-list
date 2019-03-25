@@ -1,6 +1,4 @@
-import React, { Component, Fragment } from "react";
-import styled from "styled-components";
-import * as actions from '../actions';
+import React, { Component } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 import {fetchProducts} from '../actions/index';
@@ -17,21 +15,20 @@ class ProductList extends Component {
         const {products} = this.props;
         console.log(products);
         return (
-            <div className="row">
-                {products && products.map(({_id, category, name, price, image}) => (
-                    <div className="Product-Container" key={_id}>
-                <div className="row d-flex justify-content-center">
-                    <div className="col-md-4">
-                        <p>Category: {category}</p>
-                        <p>{name}</p>
-                        <p>{price}</p>
-                    </div>
-                    <div className="col-lg-auto"></div>
-                        <img src={image} alt=""/>
-                </div>
-            </div>  
+            <div className="container">
+                    {products && products.map(({_id, name,category, price}) => (
+                        <div className="card col-md-4" key={_id}>
+                            <img className="card-img-top col-md-4" src={"https://picsum.photos/200/300"} alt=""/>
+                        <div className="card-body col-md-4">
+                        <div className="row">
+                            <h4 className="card-title col-md-4">{name}</h4>
+                            <p className="card-text col-md-4">Category: {category}</p>
+                            <p className="card-text col-md-4">$ {price}</p>
+                        </div>
+                        </div>
+                        </div>
                 ))}
-            </div>    
+            </div> 
         )
     }
 }

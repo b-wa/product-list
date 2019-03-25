@@ -1,24 +1,17 @@
-import React from 'react';
-import { withRouter } from "react-router-dom";
-import * as actions from '../actions';
-import { connect } from "react-redux";
-import styled from "styled-components";
+import React, { Fragment } from 'react';
+import ProductList from "../components/ProductList";
+//import ChangePage from './ChangePage';
+import SortPrice from './SortPrice';
 
-class App extends React.Component {
-  render() {
-    return (
-      <AppContainer>
-        {this.props.children}
-      </AppContainer>
-    )
-  }
+const App = () => {
+  return(
+    <Fragment>
+      <h1>Products</h1>
+      <SortPrice />
+      <ProductList />
+      
+    </Fragment>
+  )
 }
 
-export default withRouter(connect(
-  null,
-  actions
-)(App));
-
-const AppContainer = styled.div`
-  padding-top: 90px;
-`;
+export default App;
