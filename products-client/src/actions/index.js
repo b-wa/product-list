@@ -2,7 +2,7 @@ import axios from "axios";
 
 export const FETCH_PRODUCTS = "FETCH_PRODUCTS";
 export const NEXT_PAGE = "NEXT_PAGE";
-// export const CHANGE_CATEGORY = "CHANGE_CATEGORY"
+export const SORT_CATEGORY = "SORT_CATEGORY"
 export const SORT_PRICE = "SORT_PRICE";
 
 export const fetchProducts = () => {
@@ -29,12 +29,12 @@ export const fetchProducts = () => {
 //     }
 // };
 
-// export const changeCategory = (category) => {
-//     return {
-//         type: "CHANGE_CATEGORY",
-//         payload: category
-//     }
-// };
+export const sortCategory = (category) => {
+    return {
+        type: "SORT_CATEGORY",
+        payload: category
+    }
+};
 
 export const sortPrice = (price) => {
     return {

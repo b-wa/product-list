@@ -4,7 +4,7 @@ const initialState = {
   products: [],
   page: 1,
   category: '',
-  price: "highest"
+  price: ''
   
 }
 
