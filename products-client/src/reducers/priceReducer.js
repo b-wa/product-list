@@ -1,20 +1,18 @@
-import { SORT_PRICE } from "../actions";
+import { CHANGE_PRICE } from "../actions";
 
 const initialState = {
     products: [],
-    page: 1,
     category: '',
+    page: 1,
     price: '',
-    total_page: 0
   }
 
 export default function(state = initialState, action) {
-    const {type} = action;
-    switch (type) {
-      case SORT_PRICE:
-      return action.payload; 
+    switch (action.type) {
+      case CHANGE_PRICE:
+        return {...state, price: action.payload}; 
       default:
-      return state;
+        return state;
     }
 }
 
