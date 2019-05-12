@@ -10,21 +10,20 @@ import ChangePage from './ChangePage';
 
 
 class App extends Component {
-  componentDidMount = () => {
-    this.props.fetchProducts();
-    
+  componentDidMount() {
+    this.props.fetchProducts();   
 }
 
 render() {
   return (
     <Fragment>
       <div className="container">
-      <h1 id="title">PRODUCTS</h1>
-      <div className="row">
-        <Filter />
-        <ProductList />
-        <ChangePage />
-      </div>
+        <h1 id="title">PRODUCTS</h1>
+        <div className="row">
+          <Filter />
+          <ProductList />
+          <ChangePage />
+        </div>
       </div>
     </Fragment>
   

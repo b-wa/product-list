@@ -1,14 +1,14 @@
 import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
 import _ from "lodash";
+import { bindActionCreators } from "redux";
+import { fetchProducts } from "../actions";
 
 class ProductList extends Component {
     renderProducts() {
-        if (!this.props.products) {
-            return "LOADING..."
-        } 
-        return this.props.products.map(product => {
-            return (
+        if (!this.props.products.products) {
+            return this.props.products.map(product => {
+                return (
                 <div className="card col-md-4" key={product._id}>
                   <img className="card-img-top" src={"https://picsum.photos/200/300"} alt=""/>
                     <div className="card-body">
@@ -19,8 +19,12 @@ class ProductList extends Component {
                 </div>
                 )
             })
+        } else if (this.props.products.products.length === 0) {
+            return (
+                <div className='oops'><h1>No matching results.</h1></div>
+            )
         }
-        
+    }
         render() {
             return (
             <Fragment>
@@ -35,8 +39,11 @@ class ProductList extends Component {
     }
 
 function mapStateToProps(state) {
-  return {products: state.products.products}
+  return {products: state.products}
 }
 
-export default connect(mapStateToProps)(ProductList);
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({fetchProducts}, dispatch)
+}
 
+export default connect(mapStateToProps, mapDispatchToProps)(ProductList);

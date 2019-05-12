@@ -1,4 +1,5 @@
 import axios from "axios";
+const ROOT_URL = "http://localhost:8000/products";
 
 export const FETCH_PRODUCTS = "FETCH_PRODUCTS";
 export const NEXT_PAGE = "NEXT_PAGE";
@@ -23,7 +24,7 @@ export const CHANGE_PRICE = "CHANGE_PRICE";
 // };
 
 export const fetchProducts = (category, page, price) => {
-    const product = axios.get('http://localhost:8000/products', {params: {
+    const product = axios.get(`${ROOT_URL}`, {params: {
         category, page, price
     }})
     return {
@@ -31,7 +32,6 @@ export const fetchProducts = (category, page, price) => {
         payload: product
     }
 };
-
 
 export const nextPage = (page) => {
     return {
