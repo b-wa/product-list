@@ -6,23 +6,6 @@ export const NEXT_PAGE = "NEXT_PAGE";
 export const CHANGE_CATEGORY = "CHANGE_CATEGORY"
 export const CHANGE_PRICE = "CHANGE_PRICE";
 
-// export const fetchProducts = (category, page, price) => {
-//    return async dispatch => {
-//        try {
-//         const productsRes = await fetch('http://localhost:8000/products');
-//         const products = await productsRes.json(category, page, price);
-
-//         return dispatch({
-//             type: FETCH_PRODUCTS,
-//             payload: products
-//         })
-//        } catch (error) {
-//         console.error(error)
-//        }
-    
-//     }
-// };
-
 export const fetchProducts = (category, page, price) => {
     const product = axios.get(`${ROOT_URL}`, {params: {
         category, page, price

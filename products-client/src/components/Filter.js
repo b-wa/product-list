@@ -20,13 +20,13 @@ class Filter extends Component {
     render() {
     return (
       <div className="container">
-        <div className="row form-group">
-            <div className="search-bar">
+        <div className="row sort justify-content-center">
+            <div className="search-bar input-group col">
               <div className="col-md-4">
                 <input type="text" placeholder="Search" />
               </div>
                 <div className="col-md-4">
-                  <label>filter by category:</label>
+                  <label> filter by category: </label>
                   <select id='category' onChange={event =>this.sortCategory()}>
                     <option value=""></option>
                     <option value="Automotive">Automotive</option>
@@ -53,7 +53,7 @@ class Filter extends Component {
                   </select>
                 </div>
                 <div className="col-md-4">
-                  <label>sort by:</label>  
+                  <label> sort by: </label>  
                   <select id="price" onChange={event =>this.sortPrice()}>
                     <option value=""></option>
                     <option value="lowest">Price: Low to High</option>
@@ -68,7 +68,6 @@ class Filter extends Component {
 }
 
 function mapStateToProps(state) {
-  //console.log(state.products.category)
   return {category: state.products.category, page: state.products.page, price: state.products.price }
 }
 

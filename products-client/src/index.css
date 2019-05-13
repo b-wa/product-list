@@ -16,3 +16,18 @@ code {
 #title {
   text-align: center;
 }
+ .search-bar {
+   margin: 10px;
+ }
+
+ #category {
+   margin: 10px;
+ }
+
+ #price {
+   margin: 10px;
+ }
+
+ input[type=text] {
+   margin: 10px;
+ }
