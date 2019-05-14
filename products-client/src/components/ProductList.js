@@ -1,49 +1,49 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { connect } from "react-redux";
-import { bindActionCreators } from 'redux';
-import {fetchProducts} from '../actions/index';
 import _ from "lodash";
-import Product from "../components/Product";
+import { bindActionCreators } from "redux";
+import { fetchProducts } from "../actions";
 
 class ProductList extends Component {
-    componentDidMount = () => {
-        const {fetchProducts} = this.props;
-        fetchProducts();
+    renderProducts() {
+        if (!this.props.products.products) {
+            return this.props.products.map(product => {
+                return (
+                <div className="card col-md-4" key={product._id}>
+                  <img className="card-img-top" src={"https://picsum.photos/200/300"} alt=""/>
+                    <div className="card-body">
+                      <h4 className="card-title">{product.name}</h4>
+                      <div className="card-text">Category: {product.category.charAt(0).toUpperCase() + product.category.slice(1)}</div>
+                      <div className="card-text">Price: ${product.price}</div>
+                    </div>
+                </div>
+                )
+            })
+        } else if (this.props.products.products.length === 0) {
+            return (
+                <div className='oops'><h1>No matching results.</h1></div>
+            )
+        }
+    }
+        render() {
+            return (
+            <Fragment>
+                <div className="container">
+                 <div className="row">
+                    {this.renderProducts()}
+                 </div>
+                </div>
+            </Fragment>
+            )
+        }
     }
 
-    render() {
-        const {products} = this.props;
-        console.log(products);
-        return (
-            <div className="container">
-                    {products && products.map(({_id, name,category, price}) => (
-                        <div className="card col-md-4" key={_id}>
-                            <img className="card-img-top col-md-4" src={"https://picsum.photos/200/300"} alt=""/>
-                        <div className="card-body col-md-4">
-                        <div className="row">
-                            <h4 className="card-title col-md-4">{name}</h4>
-                            <p className="card-text col-md-4">Category: {category}</p>
-                            <p className="card-text col-md-4">$ {price}</p>
-                        </div>
-                        </div>
-                        </div>
-                ))}
-            </div> 
-        )
-    }
+function mapStateToProps(state) {
+  return {products: state.products}
 }
 
-const mapStateToProps = (state) => ({
-  products: state.products.products
-})
+function mapDispatchToProps(dispatch) {
+    return bindActionCreators({fetchProducts}, dispatch)
+}
 
-const mapDispatchToProps = dispatch => 
-bindActionCreators({ fetchProducts }, dispatch)
-
-  
-  export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-  )(ProductList);
-
-
+export default connect(mapStateToProps, mapDispatchToProps)(ProductList);

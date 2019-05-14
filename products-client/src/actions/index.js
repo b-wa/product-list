@@ -1,44 +1,38 @@
 import axios from "axios";
+const ROOT_URL = "http://localhost:8000/products";
 
 export const FETCH_PRODUCTS = "FETCH_PRODUCTS";
 export const NEXT_PAGE = "NEXT_PAGE";
-export const SORT_CATEGORY = "SORT_CATEGORY"
-export const SORT_PRICE = "SORT_PRICE";
+export const CHANGE_CATEGORY = "CHANGE_CATEGORY"
+export const CHANGE_PRICE = "CHANGE_PRICE";
 
-export const fetchProducts = () => {
-   return async dispatch => {
-       try {
-        const productsRes = await fetch('http://localhost:8000/products');
-        const products = await productsRes.json();
-
-        return dispatch({
-            type: FETCH_PRODUCTS,
-            payload: products
-        })
-       } catch (error) {
-        console.error(error)
-       }
-    
+export const fetchProducts = (category, page, price) => {
+    const product = axios.get(`${ROOT_URL}`, {params: {
+        category, page, price
+    }})
+    return {
+        type: FETCH_PRODUCTS,
+        payload: product
     }
 };
 
-// export const nextPage = (page) => {
-//     return {
-//         type: NEXT_PAGE,
-//         payload: page
-//     }
-// };
-
-export const sortCategory = (category) => {
+export const nextPage = (page) => {
     return {
-        type: "SORT_CATEGORY",
+        type: NEXT_PAGE,
+        payload: page
+    }
+};
+
+export const changeCategory = (category) => {
+    return {
+        type: CHANGE_CATEGORY,
         payload: category
     }
 };
 
-export const sortPrice = (price) => {
+export const changePrice = (price) => {
     return {
-        type: "SORT_PRICE",
+        type: CHANGE_PRICE,
         payload: price
     }
 };
