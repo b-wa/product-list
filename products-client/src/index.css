@@ -31,3 +31,7 @@ code {
  input[type=text] {
    margin: 10px;
  }
+
+ #row-pages {
+   margin: auto
+ }

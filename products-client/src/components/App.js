@@ -10,6 +10,7 @@ import ChangePage from './ChangePage';
 
 
 class App extends Component {
+  //fetch products
   componentDidMount() {
     this.props.fetchProducts();   
 }

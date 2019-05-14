@@ -11,20 +11,21 @@ class ChangePage extends Component {
   }
   render() {
   return (
-    <div id="page-navigation">
-    <div className='row'>
-        <div className="btn btn-primary" onClick={event => this.handlePage(1)}>1</div>
-        <div className="btn btn-primary" onClick={event => this.handlePage(2)}>2</div>
-        <div className="btn btn-primary" onClick={event => this.handlePage(3)}>3</div>
-        <div className="btn btn-primary" onClick={event => this.handlePage(4)}>4</div>
-        <div className="btn btn-primary" onClick={event => this.handlePage(5)}>5</div>
-        <div className="btn btn-primary" onClick={event => this.handlePage(6)}>6</div>
-        <div className="btn btn-primary" onClick={event => this.handlePage(7)}>7</div>
-        <div className="btn btn-primary" onClick={event => this.handlePage(8)}>8</div>
-        <div className="btn btn-primary" onClick={event => this.handlePage(9)}>9</div>
-        <div className="btn btn-primary" onClick={event => this.handlePage(10)}>10</div>
+    <div id="row-pages">
+      <div className="pagination">
+        <div className="page-number"><button className="page-link" onClick={event => this.handlePage}>1</button></div>
+        <div className="page-number"><button className="page-link" onClick={event => this.handlePage}>2</button></div>
+        <div className="page-number"><button className="page-link" onClick={event => this.handlePage}>3</button></div>
+        <div className="page-number"><button className="page-link" onClick={event => this.handlePage}>4</button></div>
+        <div className="page-number"><button className="page-link" onClick={event => this.handlePage}>5</button></div>
+        <div className="page-number"><button className="page-link" onClick={event => this.handlePage}>6</button></div>
+        <div className="page-number"><button className="page-link" onClick={event => this.handlePage}>7</button></div>
+        <div className="page-number"><button className="page-link" onClick={event => this.handlePage}>8</button></div>
+        <div className="page-number"><button className="page-link" onClick={event => this.handlePage}>9</button></div>
+        <div className="page-number"><button className="page-link" onClick={event => this.handlePage}>10</button></div>
+      </div>
     </div>
-  </div>
+    
   )
   }
 }
